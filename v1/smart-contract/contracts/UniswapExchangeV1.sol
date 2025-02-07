@@ -28,7 +28,7 @@ contract UniswapV1Exchange {
     function removeLiquidity(uint256 amount) public {
         require(liquidity[msg.sender] >= amount, "Insufficient liquidity");
         uint256 ethAmount = amount;
-        uint256 tokenAmount = (token.balanceOf(address(this)) * amount) / totalLiquidity;
+        uint256 tokenAmount = (token.balanceOf(address(this)) * amount) / address(this).balance;
 
         payable(msg.sender).transfer(ethAmount);
         token.transfer(msg.sender, tokenAmount);
